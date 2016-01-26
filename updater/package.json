@@ -1,0 +1,22 @@
+{
+  "name": "ad-landsat-vector-tile-updater",
+  "version": "0.0.1",
+  "description": "An updater for vector tiles used for ad-next, pulled from landsat-api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Development Seed",
+  "license": "BSD",
+  "dependencies": {
+    "async": "^1.5.2",
+    "babel": "^6.1.18",
+    "babel-preset-es2015": "^6.3.13",
+    "babel-register": "^6.3.13",
+    "iron_worker": "^0.1.6",
+    "lodash": "^4.0.1",
+    "mapbox-upload": "^4.2.1",
+    "mongodb": "^2.1.4",
+    "winston": "^2.1.1"
+  }
+}

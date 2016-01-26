@@ -1,0 +1,17 @@
+test:
+  build: .
+  command: node index.js -payload payload.json
+  container_name: ad-landsat-vector-tile-updater
+  working_dir: /worker
+
+shell:
+  build: .
+  command: /bin/bash
+  container_name: ad-landsat-vector-tile-updater
+  working_dir: /worker
+
+deploy:
+  build: .
+  command: bash -c 'ls; zip -qr updater.zip .; iron worker upload --name ad-landsat-vector-tile-updater --zip updater.zip iron/images:node-4.1 node index.js;'
+  container_name: ad-landsat-vector-tile-updater
+  working_dir: /worker
