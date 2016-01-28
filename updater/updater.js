@@ -42,7 +42,7 @@ let addSceneProperties = function (feature, doc) {
   let idx = keysLength / 3;  // Three unique keys for each scene
 
   // Unique scene information
-  feature.properties[`s${idx}`] = `${doc.sceneID.substring(1, 2)}${doc.sceneID.substring(18, 20)}`;
+  feature.properties[`s${idx}`] = `${doc.sceneID.substring(1, 2)}${doc.sceneID.substring(18, 19)}${doc.sceneID.substring(20, 21)}`;
 
   // Cloud cover
   feature.properties[`c${idx}`] = doc.cloudCoverFull;
