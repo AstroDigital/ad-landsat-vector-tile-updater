@@ -78,7 +78,7 @@ MongoClient.connect(dbURL, (err, db) => {
       query.acquisitionDate = { $regex: new RegExp(pattern) };
     }
 
-    let cursor = c.find(query, {limit: 100});
+    let cursor = c.find(query);
     let count = 0;
     let geojson = {
       type: 'FeatureCollection',
