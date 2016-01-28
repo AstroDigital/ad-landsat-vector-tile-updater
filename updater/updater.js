@@ -70,10 +70,15 @@ MongoClient.connect(dbURL, (err, db) => {
   // Grab all daytime items given our regex pattern and return the geojson
   let buildGeoJSON = function (pattern, cb) {
     let query = {
-      acquisitionDate: { $regex: new RegExp(pattern) },
       dayOrNight: 'DAY'
     };
-    let cursor = c.find({query});
+
+    // Add regex if we have a pattern
+    if (pattern !== 'all') {
+      query.acquisitionDate = { $regex: new RegExp(pattern) };
+    }
+
+    let cursor = c.find(query, {limit: 100});
     let count = 0;
     let geojson = {
       type: 'FeatureCollection',
@@ -91,8 +96,10 @@ MongoClient.connect(dbURL, (err, db) => {
       if (feature) {
         winston.verbose(`We found a matching feature for ${pr}`);
 
-        // Add addition scene specific properties
-        feature = addSceneProperties(feature, doc);
+        // Add addition scene specific properties unless this is for all years
+        if (pattern !== 'all') {
+          feature = addSceneProperties(feature, doc);
+        }
       } else {
         winston.verbose(`Adding a new feature for for ${pr}`);
 
@@ -105,8 +112,10 @@ MongoClient.connect(dbURL, (err, db) => {
           }
         };
 
-        // Add addition scene specific properties
-        feature = addSceneProperties(feature, doc);
+        // Add addition scene specific properties unless this is for all years
+        if (pattern !== 'all') {
+          feature = addSceneProperties(feature, doc);
+        }
 
         // Add feature to array
         geojson.features.push(feature);
@@ -122,7 +131,7 @@ MongoClient.connect(dbURL, (err, db) => {
 
         count++;
         if (count % 1000 === 0) {
-          winston.verbose(`Processed ${count} records.`);
+          winston.info(`Processed ${count} records.`);
         }
       }
     });
