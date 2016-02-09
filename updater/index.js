@@ -1,5 +1,5 @@
 // only ES5 is allowed in this file
 require('babel-register')();
 
-// load the server
-require('./updater');
+// load the update and run it
+require('./updater').doTheThing();

@@ -5,4 +5,5 @@
         {"pattern": "^2016", "mapboxAccount": "astrodigital", "mapboxID": "landsat_meta_2016"},
         {"pattern": "^2015", "mapboxAccount": "astrodigital", "mapboxID": "landsat_meta_2015"}
     ],
+    "mapboxToken": "write_token"
 }

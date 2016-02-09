@@ -1,6 +1,6 @@
 test:
   build: .
-  command: node index.js -payload payload.json
+  command: npm run test
   container_name: ad-landsat-vector-tile-updater
   working_dir: /worker
 
