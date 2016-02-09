@@ -92,17 +92,20 @@ export function doTheThing () {
     // Our landsat collection
     let c = db.collection('landsats');
 
-    // Grab all daytime items given our regex pattern and return the geojson,
-    // so that we don't beat the data stores, don't get items for today
-    let buildGeoJSON = function (pattern, cb) {
+    // Grab all daytime items given our regex pattern and return the geojson
+    let buildGeoJSON = function (pattern, skipToday = false, cb) {
       // Get today's date in YYYY-MM-DD
 
       let query = {
         $and: [
-          {'dayOrNight': 'DAY'},
-          {'acquisitionDate': {$lt: moment().format('YYYY-MM-DD')}}
+          {'dayOrNight': 'DAY'}
         ]
       };
+
+      // Skip today's results so that we don't beat the data stores
+      if (skipToday) {
+        query['$and'].push({'acquisitionDate': {$lt: moment().format('YYYY-MM-DD')}});
+      }
 
       // Add regex if we have a pattern
       if (pattern !== 'all') {
@@ -176,7 +179,7 @@ export function doTheThing () {
     let groups = groupings.map((g) => {
       return function (done) {
         winston.info(`Running for grouping ${g.pattern} and uploading to ${g.mapboxID}`);
-        buildGeoJSON(g.pattern, (geojson) => {
+        buildGeoJSON(g.pattern, g.skipToday, (geojson) => {
           // Save it to disk so we can upload to Mapbox, we're already blocked
           // here so just do it sync
           let filename = `${g.mapboxID}.geojson`;
