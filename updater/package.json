@@ -1,12 +1,17 @@
 {
   "name": "ad-landsat-vector-tile-updater",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An updater for vector tiles used for ad-next, pulled from landsat-api",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "tape": "tape -r babel-register test/**/*.js",
+    "test": "nyc npm run tape"
   },
   "author": "Development Seed",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AstroDigital/ad-landsat-vector-tile-updater.git"
+  },
   "license": "BSD",
   "dependencies": {
     "async": "^1.5.2",
@@ -16,7 +21,12 @@
     "iron_worker": "^0.1.6",
     "lodash": "^4.0.1",
     "mapbox-upload": "^4.2.1",
+    "moment": "^2.11.2",
     "mongodb": "^2.1.4",
     "winston": "^2.1.1"
+  },
+  "devDependencies": {
+    "nyc": "^5.5.0",
+    "tape": "^4.4.0"
   }
 }
