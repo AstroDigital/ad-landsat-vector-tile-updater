@@ -1,4 +1,4 @@
-### landsat-api vector tiles updater
+### landsat-api vector tiles updater [![Build Status](https://travis-ci.com/AstroDigital/ad-landsat-vector-tile-updater.svg?token=eXqSVyxhS9r5JxVjZqpW&branch=master)](https://travis-ci.com/AstroDigital/ad-landsat-vector-tile-updater)
 
 This application is designed to run on IronWorker from Iron.io and update a Mapbox vector tile set on a regular basis to power the frontend for ad-next.
 
